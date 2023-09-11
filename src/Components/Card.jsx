@@ -3,8 +3,6 @@ import { ContextGlobal } from "./utils/global.context";
 
 const Card = () => {
   const { state } = useContext(ContextGlobal);
-
-  // Verifica si state.allUsers es un arreglo antes de mapearlo
   const users = Array.isArray(state.allUsers) ? state.allUsers : [];
 
   return (
@@ -21,7 +19,6 @@ const Card = () => {
           />
           <h2>{user.name}</h2>
           <p>{user.username}</p>
-          {/* Agrega más detalles si es necesario */}
         </div>
       ))}
     </div>
