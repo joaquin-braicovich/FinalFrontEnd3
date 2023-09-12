@@ -37,7 +37,7 @@
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 3 columnas de tamaño igual */
+  grid-template-columns: repeat(5, 1fr); /* 3 columnas de tamaño igual */
   gap: 20px; /* Espacio entre las tarjetas */
   padding: 100px;
 }

@@ -7,6 +7,7 @@ const Home = () => {
     <main className="">
       <div className="card-grid">
         {/* Aqui deberias renderizar las cards */}
+        <Card />
       </div>
     </main>
   );
