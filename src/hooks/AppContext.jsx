@@ -1,15 +1,10 @@
-import React, { createContext, useReducer } from "react";
-import GlobalReducer from "./globalReducer";
-export const ContextGlobal = createContext(undefined);
+import { useContext } from "react";
+import { ContextGlobal } from "../Components/utils/global.context";
 
-const initialValue = {
-  data: [],
-  themeClass: "light-theme",
-  favorites: [],
-};
+export const AppContext = () => {
+  const context = useContext(ContextGlobal);
 
-export const ContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(GlobalReducer, initialValue);
+  const [state, dispatch] = context;
 
   const handleTheme = () => {
     dispatch({ type: "toggleTheme" });
@@ -39,17 +34,12 @@ export const ContextProvider = ({ children }) => {
     dispatch({ type: "REMOVE_FAVORITE", payload: id });
   };
 
-  return (
-    <ContextGlobal.Provider
-      value={{
-        state,
-        handleTheme,
-        getUsers,
-        addFavorite,
-        removeFavorite,
-      }}
-    >
-      {children}
-    </ContextGlobal.Provider>
-  );
+  return {
+    handleTheme,
+    getUsers,
+    addFavorite,
+    removeFavorite,
+    state,
+    dispatch,
+  };
 };
