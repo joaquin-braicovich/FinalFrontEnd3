@@ -1,58 +1,47 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ContextGlobal } from "./utils/global.context";
 
-const Card = ({ data }) => {
+const Card = ({ user }) => {
   const {
-    state,
-    getUsers,
     addFavorite,
     removeFavorite,
-    state: { favorites },
+    state: { favorites, themeClass },
   } = useContext(ContextGlobal);
 
-  const { id } = data || {};
+  const isFavFunction = () => {
+    return favorites.some((fav) => fav.id === user.id);
+  };
 
-  const isFav = favorites.some((fav) => fav.id === id);
-
-  const [isFavorite, setIsFavorite] = useState(isFav);
+  // esto es una state local no interfiere en el state que tenes en el context, se usa solo para mostrar el mensaje
+  const [isFavorite, setIsFavorite] = useState(isFavFunction());
 
   const onFavButtonClick = (e) => {
     e.stopPropagation();
-
-    if (!isFavorite) {
-      addFavorite(data);
-    } else {
-      removeFavorite(id);
+    if (isFavorite) {
+      removeFavorite(user.id);
+      setIsFavorite(false);
+      //Este return hace que salga de la funcion (onFavButtonClick). Para no poner un else y tener tantos de estos {}
+      return;
     }
-
-    setIsFavorite(!isFavorite);
+    addFavorite(user);
+    setIsFavorite(true);
   };
 
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const datos = Array.isArray(state.data) ? state.data : [];
-
   return (
-    <div className={`card-container ${state.themeClass}`}>
-      {datos.map((user) => (
-        <div className="card" key={user.id}>
-          <img
-            style={{
-              width: "100%",
-              height: "100%",
-            }}
-            src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/landing+page/ezgif.com-gif-maker+(1).webp"
-            alt=""
-          />
-          <h2>Name: {user.name}</h2>
-          <p>Username: {user.username}</p>
-          <button onClick={onFavButtonClick}>
-            {isFav ? "Remove from Favorites" : "Add to Favorites"}
-          </button>
-        </div>
-      ))}
+    <div style={{ paddingBottom: "1rem" }} className="card" key={user.id}>
+      <img
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+        src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/landing+page/ezgif.com-gif-maker+(1).webp"
+        alt=""
+      />
+      <h2>Name: {user.name}</h2>
+      <p>Username: {user.username}</p>
+      <button onClick={onFavButtonClick}>
+        {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+      </button>
     </div>
   );
 };
