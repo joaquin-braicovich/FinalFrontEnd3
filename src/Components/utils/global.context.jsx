@@ -2,10 +2,12 @@ import React, { createContext, useReducer } from "react";
 import GlobalReducer from "./globalReducer";
 export const ContextGlobal = createContext(undefined);
 
+const storedFavorites = localStorage.getItem("favorites");
+
 const initialValue = {
   data: [],
   themeClass: "light-theme",
-  favorites: [],
+  favorites: storedFavorites ? JSON.parse(storedFavorites) : [],
 };
 
 export const ContextProvider = ({ children }) => {
@@ -31,6 +33,21 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
+  const getUserById = async (id) => {
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/users/${id}`
+      );
+      if (!response.ok) {
+        throw new Error("Error fetching data");
+      }
+      const data = await response.json();
+      dispatch({ type: "setData", payload: data });
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const addFavorite = (data) => {
     dispatch({ type: "ADD_FAVORITE", payload: data });
   };
@@ -45,6 +62,7 @@ export const ContextProvider = ({ children }) => {
         state,
         handleTheme,
         getUsers,
+        getUserById,
         addFavorite,
         removeFavorite,
       }}

@@ -37,9 +37,18 @@
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 3 columnas de tamaño igual */
-  gap: 20px; /* Espacio entre las tarjetas */
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
   padding: 100px;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  background-color: #5383e8;
+  min-height: 100vh;
 }
 
 .card {
@@ -48,6 +57,10 @@
   flex-direction: column;
   justify-content: center;
   border: 1px solid black;
+}
+
+.button-card {
+  background-color: white;
 }
 
 .read-the-docs {
@@ -101,6 +114,12 @@ img {
 .dark-theme .card {
   background-color: #35363a;
   color: white;
+}
+.dark-theme .button-card {
+  background-color: #35363a;
+}
+.dark-theme .card-grid {
+  background-color: #1d1f25;
 }
 
 .link-style {

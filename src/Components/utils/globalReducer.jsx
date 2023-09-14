@@ -11,18 +11,26 @@ export const GlobalReducer = (state, action) => {
         ...state,
         data: action.payload,
       };
-
+      setDataUserById;
     case "ADD_FAVORITE": {
+      const newFavorites = [...state.favorites, action.payload];
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
+
       return {
         ...state,
-        favorites: [...state.favorites, action.payload],
+        favorites: newFavorites,
       };
     }
 
     case "REMOVE_FAVORITE": {
+      const newFavorites = state.favorites.filter(
+        (fav) => fav.id !== action.payload
+      );
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
+
       return {
         ...state,
-        favorites: state.favorites.filter((fav) => fav.id !== action.payload),
+        favorites: newFavorites,
       };
     }
 
