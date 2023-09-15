@@ -14,9 +14,9 @@ const Home = () => {
     <main className={` ${state.themeClass}`}>
       <div className="card-grid">
         <div className={`card-container ${state.themeClass}`}>
-          {state.data.map((user) => (
-            <Card key={user.id} user={user} />
-          ))}
+          {state.data &&
+            state.data.length > 0 &&
+            state.data.map((user) => <Card key={user.id} user={user} />)}
         </div>
       </div>
     </main>

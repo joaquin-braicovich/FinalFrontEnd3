@@ -1,17 +1,17 @@
 export const GlobalReducer = (state, action) => {
   switch (action.type) {
-    case "toggleTheme":
+    case "TOGGLE_THEME":
       return {
         ...state,
         themeClass:
           state.themeClass === "light-theme" ? "dark-theme" : "light-theme",
       };
-    case "setData":
+    case "SET_DATA":
       return {
         ...state,
         data: action.payload,
       };
-      setDataUserById;
+
     case "ADD_FAVORITE": {
       const newFavorites = [...state.favorites, action.payload];
       localStorage.setItem("favorites", JSON.stringify(newFavorites));
@@ -37,6 +37,13 @@ export const GlobalReducer = (state, action) => {
     default:
       return state;
   }
+};
+
+export const ACTION_TYPE = {
+  TOGGLE_THEME: "TOGGLE_THEME",
+  SET_DATA: "SET_DATA",
+  ADD_FAVORITE: "ADD_FAVORITE",
+  REMOVE_FAVORITE: "REMOVE_FAVORITE",
 };
 
 export default GlobalReducer;

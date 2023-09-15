@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ContextGlobal } from "./utils/global.context";
 
@@ -7,7 +7,6 @@ const Card = ({ user }) => {
     state,
     addFavorite,
     removeFavorite,
-    getUsersById,
     state: { favorites },
   } = useContext(ContextGlobal);
 

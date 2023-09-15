@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import GlobalReducer from "./globalReducer";
+import GlobalReducer, { ACTION_TYPE } from "./globalReducer";
 export const ContextGlobal = createContext(undefined);
 
 const storedFavorites = localStorage.getItem("favorites");
@@ -14,7 +14,7 @@ export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(GlobalReducer, initialValue);
 
   const handleTheme = () => {
-    dispatch({ type: "toggleTheme" });
+    dispatch({ type: ACTION_TYPE.TOGGLE_THEME });
   };
 
   const getUsers = async () => {
@@ -27,7 +27,7 @@ export const ContextProvider = ({ children }) => {
       }
       const data = await response.json();
 
-      dispatch({ type: "setData", payload: data });
+      dispatch({ type: ACTION_TYPE.SET_DATA, payload: data });
     } catch (error) {
       throw error;
     }
@@ -42,7 +42,7 @@ export const ContextProvider = ({ children }) => {
         throw new Error("Error fetching data");
       }
       const data = await response.json();
-      dispatch({ type: "setData", payload: data });
+      return data;
     } catch (error) {
       throw error;
     }
@@ -60,6 +60,7 @@ export const ContextProvider = ({ children }) => {
     <ContextGlobal.Provider
       value={{
         state,
+        dispatch,
         handleTheme,
         getUsers,
         getUserById,
