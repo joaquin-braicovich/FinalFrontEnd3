@@ -6,14 +6,19 @@ import FormCard from "../Components/FormCard";
 
 const Contact = () => {
   const [usuarios, setUsuarios] = useState([]);
+  const [mostrarFormulario, setMostrarFormulario] = useState(true);
   const addUsuario = (user) => {
-    setUsuarios([...usuarios, user]);
-    console.log(usuarios);
+    setUsuarios((prevUsuarios) => {
+      const updatedUsuarios = [...prevUsuarios, user];
+      console.log(updatedUsuarios); // Aquí verás el valor actualizado
+      return updatedUsuarios;
+    });
+    setMostrarFormulario(false);
   };
 
   return (
     <div>
-      <Form onAddUser={addUsuario} />
+      {mostrarFormulario && <Form onAddUser={addUsuario} />}
       <FormCard usuarios={usuarios} />
     </div>
   );

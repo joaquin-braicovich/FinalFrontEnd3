@@ -2,6 +2,8 @@ import React from "react";
 import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { ContextGlobal } from "./utils/global.context";
+import Moon from "../assets/moon-solid.svg";
+import Sun from "../assets/sun-solid.svg";
 
 const Navbar = () => {
   const { state, handleTheme } = useContext(ContextGlobal);
@@ -28,15 +30,9 @@ const Navbar = () => {
 
           <button onClick={handleTheme}>
             {state.themeClass === "light-theme" ? (
-              <img
-                src="https://images.vexels.com/media/users/3/273011/isolated/preview/bac1c9f19d573ed4d8ec48233952c870-icono-de-luna-de-juego-de-rol.png"
-                alt="Tema Claro"
-              />
+              <img src={Moon} alt="Tema Claro" />
             ) : (
-              <img
-                src="https://cdn-icons-png.flaticon.com/256/4457/4457060.png"
-                alt="Tema Oscuro"
-              />
+              <img src={Sun} alt="Tema Oscuro" />
             )}
           </button>
         </nav>

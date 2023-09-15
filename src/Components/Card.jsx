@@ -1,6 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ContextGlobal } from "./utils/global.context";
+import Dentist from "../assets/dentist.png";
+import EmptyHeart from "../assets/heart-regular.svg";
+import FullHeart from "../assets/heart-solid.svg";
 
 const Card = ({ user }) => {
   const {
@@ -35,8 +38,8 @@ const Card = ({ user }) => {
             width: "100%",
             height: "100%",
           }}
-          src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/landing+page/ezgif.com-gif-maker+(1).webp"
-          alt=""
+          src={Dentist}
+          alt="Dentist Ilustration"
         />
       </div>
       <div>
@@ -49,16 +52,11 @@ const Card = ({ user }) => {
           <Link to={`/dentist/${user.id}`}>{user.username}</Link>
         </h4>
         <button className="button-card" onClick={onFavButtonClick}>
-          <img
-            src={
-              isFavorite
-                ? "https://static.vecteezy.com/system/resources/previews/011/729/444/original/red-heart-icon-free-png.png"
-                : "https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
-            }
-            alt="Favorite"
-            width="30"
-            height="30"
-          />
+          {isFavorite ? (
+            <img className="corazon" src={FullHeart} alt="Corazon lleno" />
+          ) : (
+            <img src={EmptyHeart} alt="Corazon vacio" />
+          )}
         </button>
       </div>
     </div>

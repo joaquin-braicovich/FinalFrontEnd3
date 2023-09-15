@@ -12,10 +12,10 @@ const Form = ({ onAddUser }) => {
   const validarCampos = (fullName, email) => {
     const camposValidos =
       fullName.trim().length >= 3 && email.trim().length >= 3;
+    const sonNumeros = !isNaN(fullName.trim());
+    const formatoEmailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
-    const sonNumeros = !isNaN(fullName.trim()) || !isNaN(email.trim());
-
-    return camposValidos && !sonNumeros;
+    return camposValidos && !sonNumeros && formatoEmailValido;
   };
 
   const handleSubmit = (e) => {
@@ -33,13 +33,13 @@ const Form = ({ onAddUser }) => {
 
   return (
     <main className={` card-grid ${state.themeClass}`}>
-      <div>
+      <div className="card-form">
         <h2>Want to know more?</h2>
         <p>Send us your cuestions and we will contact you</p>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="FullName"
+            placeholder="Full Name"
             className="myInput"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
