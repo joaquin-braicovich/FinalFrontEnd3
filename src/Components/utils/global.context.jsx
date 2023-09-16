@@ -28,6 +28,7 @@ export const ContextProvider = ({ children }) => {
       const data = await response.json();
 
       dispatch({ type: ACTION_TYPE.SET_DATA, payload: data });
+      return data;
     } catch (error) {
       throw error;
     }
